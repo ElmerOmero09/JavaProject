@@ -70,14 +70,9 @@ public class BudgetMain
             for (int i=0; i < needNames.size(); i++) 
             {
                 System.out.println( needNames.get(i) + " : $" + needAmounts.get(i) + "\n");
-                
+                System.out.printf("Needs Total: $%.2f%n", recursiveSum(needAmounts));
             }
         }
-    }
-    
-    public void needsTotal()
-    {
-        
     }
     
     public void wantsSummary() {
@@ -91,13 +86,26 @@ public class BudgetMain
             for (int i=0; i < wantNames.size(); i++) 
             {
                 System.out.println( wantNames.get(i) + " : $" + wantAmounts.get(i) +"\n");
+                System.out.printf("Wants Total: $%.2f%n", recursiveSum(wantAmounts));
             }
         }
     }
     
     public void savingsSummary() 
     {
-        System.out.println("Savings total = $" + budget1.getSavingsTotal());
+        System.out.println("-----Wants-----");
+        if (savingAmounts.isEmpty()) 
+        {
+            System.out.println("No savings has occured");
+        }
+        else 
+        {
+            for (int i=0; i < savingAmounts.size(); i++) 
+            {
+                System.out.printf("Savings Total: $%.2f%n", recursiveSum(savingAmounts));
+            }
+        }
+        ;
     }
     
     public static void validateStandard()
