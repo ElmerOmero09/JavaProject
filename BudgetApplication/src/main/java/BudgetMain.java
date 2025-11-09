@@ -34,32 +34,45 @@ public class BudgetMain
     ArrayList<String> savingsNames = new ArrayList<>();
     ArrayList<Double> savingAmounts = new ArrayList<>();
     
-    public void needsSummary() {
+    public void needsSummary() 
+    {
         System.out.println("-----Needs-----");
-        if (needNames.isEmpty()) {
+        if (needNames.isEmpty()) 
+        {
             System.out.println("No spending has occured");
         }
-        else {
-            for (int i=0; i < needNames.size(); i++) {
+        else 
+        {
+            for (int i=0; i < needNames.size(); i++) 
+            {
                 System.out.println( needNames.get(i) + " : $" + needAmounts.get(i) + "\n");
-                // 
+                
             }
         }
     }
     
+    public void needsTotal()
+    {
+        //recursive function to add totals using currentNeedsTotal
+    }
+    
     public void wantsSummary() {
         System.out.println("-----Wants-----");
-        if (needNames.isEmpty()) {
+        if (needNames.isEmpty()) 
+        {
             System.out.println("No spending has occured");
         }
-        else {
-            for (int i=0; i < wantNames.size(); i++) {
+        else 
+        {
+            for (int i=0; i < wantNames.size(); i++) 
+            {
                 System.out.println( wantNames.get(i) + " : $" + wantAmounts.get(i) +"\n");
             }
         }
     }
     
-    public void savingsSummary() {
+    public void savingsSummary() 
+    {
         System.out.println("Savings total = $" + budget1.getSavingsTotal());
     }
     
