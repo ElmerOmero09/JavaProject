@@ -105,7 +105,6 @@ public class BudgetMain
                 System.out.printf("Savings Total: $%.2f%n", recursiveSum(savingAmounts));
             }
         }
-        ;
     }
     
     public static void validateStandard()
