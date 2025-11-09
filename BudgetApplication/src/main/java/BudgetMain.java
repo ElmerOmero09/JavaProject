@@ -34,6 +34,30 @@ public class BudgetMain
     ArrayList<String> savingsNames = new ArrayList<>();
     ArrayList<Double> savingAmounts = new ArrayList<>();
     
+    // recursive function to add up arraylist amounts. takes a list, takes the last 
+    // value of that list, creates a sublist that removes that last value and passes that 
+    // sublist through the recursive function to get the next item. 
+    public double recursiveSum(ArrayList<Double> list)
+    {
+        int size = list.size(); 
+        
+        if(size == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            // start with the last value
+            double lastValue = list.get(size-1);
+            
+            // create a new list without the last value of the list versoin you are in
+            ArrayList<Double> sublist = new ArrayList<>(list.subList(0, size-1));
+            
+            return lastValue + recursiveSum(sublist);
+        }
+        
+    }
+    
     public void needsSummary() 
     {
         System.out.println("-----Needs-----");
@@ -53,7 +77,7 @@ public class BudgetMain
     
     public void needsTotal()
     {
-        //recursive function to add totals using currentNeedsTotal
+        
     }
     
     public void wantsSummary() {
