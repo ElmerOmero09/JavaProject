@@ -19,18 +19,19 @@ public class BudgetMain
     static Scanner scan = new Scanner(System.in);
     static double income;
     static String standard = " ";
-    static BudgetLogic budget1; 
+    static BudgetLogic budget1;
     
-    ArrayList<String> needNames = new ArrayList<>();
-    ArrayList<Double> needAmounts = new ArrayList<>();
+    static ArrayList<String> needNames = new ArrayList<>();
+    static ArrayList<Double> needAmounts = new ArrayList<>();
     
-    ArrayList<String> wantNames = new ArrayList<>();
-    ArrayList<Double> wantAmounts = new ArrayList<>();
+    static ArrayList<String> wantNames = new ArrayList<>();
+    static ArrayList<Double> wantAmounts = new ArrayList<>();
     
-    ArrayList<String> savingsNames = new ArrayList<>();
-    ArrayList<Double> savingAmounts = new ArrayList<>();
+    static ArrayList<String> savingsNames = new ArrayList<>();
+    static ArrayList<Double> savingAmounts = new ArrayList<>();
     
-    public void needsSummary() {
+    public static void needsSummary() {
+        double runningTotal = 0.0;
         System.out.println("-----Needs-----");
         if (needNames.isEmpty()) {
             System.out.println("No spending has occured");
@@ -38,11 +39,14 @@ public class BudgetMain
         else {
             for (int i=0; i < needNames.size(); i++) {
                 System.out.println( needNames.get(i) + " : $" + needAmounts.get(i) + "\n");
+                runningTotal += needAmounts.get(i);
             }
+            System.out.println("Remaining Balance: $" + (budget1.getNeedsTotal() - budget1.needsSpent));
         }
     }
     
-    public void wantsSummary() {
+    public static void wantsSummary() {
+        double runningTotal = 0.0;
         System.out.println("-----Wants-----");
         if (needNames.isEmpty()) {
             System.out.println("No spending has occured");
@@ -50,12 +54,14 @@ public class BudgetMain
         else {
             for (int i=0; i < wantNames.size(); i++) {
                 System.out.println( wantNames.get(i) + " : $" + wantAmounts.get(i) +"\n");
+                runningTotal += wantAmounts.get(i);
             }
+            System.out.println("Remaining Balance: $" + (budget1.getNeedsTotal() - budget1.wantsSpent));
         }
     }
     
-    public void savingsSummary() {
-        System.out.println("Savings total = $" + budget1.savingsTotal);
+    public static void savingsSummary() {
+        System.out.println("Savings total: $" + budget1.getSavingsTotal());
     }
     
     public static void validateStandard()
@@ -110,6 +116,7 @@ public class BudgetMain
     //BudgetLogic budget1 = new BudgetLogic(income); 
     if (standard.equalsIgnoreCase("no")) {
         budget1 = new BudgetLogic(income);
+        budget1.calculateCategories();
     }
     else {
         System.out.println("Enter percentage allocated to Needs: (enter as decimal)");
@@ -122,6 +129,78 @@ public class BudgetMain
         double savingsPercentage = scan.nextDouble();
         
         budget1 = new BudgetLogic(needsPercentage, wantsPercentage, savingsPercentage, income);
+        //budget1.calculateCategories();
+        
+    }
+    
+    //user menu where they can add things, view summaries, and exit
+    boolean menu = true;
+    while (menu) {
+        String stringInput;
+        double costInput; 
+        System.out.println("-----Menu-----");
+        System.out.println("1 - Add Needs");
+        System.out.println("2 - Add Wants");
+        System.out.println("3 - View Needs Summary");
+        System.out.println("4 - View Wants Summary");
+        System.out.println("5 - View Savings Summary");
+        System.out.println("6 - Reset Percentages"); //IDK if we want this or not
+        System.out.println("7 - Exit");
+        
+        int choice = scan.nextInt();
+        scan.nextLine();
+        
+        if (choice == 1) {
+            System.out.println("Quantity of needs to enter:");
+            int num = scan.nextInt();
+            scan.nextLine();
+            for (int i=0; i < num; i++) {
+                System.out.println("Name of item: ");
+                stringInput = scan.nextLine();
+                needNames.add(stringInput);
+                
+                System.out.println("Cost of item: ");
+                costInput = scan.nextDouble();
+                needAmounts.add(costInput);
+                budget1.addNeed(costInput);
+                scan.nextLine();
+            }
+        }
+        else if (choice == 2) {
+            System.out.println("Quantity of wants to enter:");
+            int num = scan.nextInt();
+            scan.nextLine();
+            for (int i=0; i < num; i++) {
+                System.out.println("Name of item: ");
+                stringInput = scan.nextLine();
+                wantNames.add(stringInput);
+                
+                System.out.println("Cost of item: ");
+                costInput = scan.nextDouble();
+                wantAmounts.add(costInput);
+                budget1.addWant(costInput);
+                scan.nextLine();
+            }
+        }
+        else if (choice == 3) {
+            needsSummary();
+        }
+        else if (choice == 4) {
+            wantsSummary();
+        }
+        else if (choice == 5) {
+            savingsSummary();
+        }
+        else if (choice==6) {
+            //add something to allow changing percentage allocations
+        }
+        else if (choice == 7) {
+            menu = false;
+            System.out.println("Budget Education Successfull"); //wrote this as a joke, couldnt think of an exit message
+        }
+        else {
+            System.out.println("Enter a valid option");
+        }
         
     }
     
