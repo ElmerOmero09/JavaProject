@@ -1,5 +1,4 @@
 
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -20,6 +19,10 @@ public class BudgetMain
     static double income;
     static String standard = " ";
     static BudgetLogic budget1; 
+    // global counter variables for each running totals of categories. 
+    double currentNeedsTtotal = 0; 
+    double currentWantsTotal = 0;
+    double currentSavingsTotal = 0; 
     
     ArrayList<String> needNames = new ArrayList<>();
     ArrayList<Double> needAmounts = new ArrayList<>();
@@ -30,32 +33,77 @@ public class BudgetMain
     ArrayList<String> savingsNames = new ArrayList<>();
     ArrayList<Double> savingAmounts = new ArrayList<>();
     
-    public void needsSummary() {
+    // recursive function to add up arraylist amounts. takes a list, takes the last 
+    // value of that list, creates a sublist that removes that last value and passes that 
+    // sublist through the recursive function to get the next item. 
+    public double recursiveSum(ArrayList<Double> list)
+    {
+        int size = list.size(); 
+        
+        if(size == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            // start with the last value
+            double lastValue = list.get(size-1);
+            
+            // create a new list without the last value of the list versoin you are in
+            ArrayList<Double> sublist = new ArrayList<>(list.subList(0, size-1));
+            
+            return lastValue + recursiveSum(sublist);
+        }
+        
+    }
+    
+    public void needsSummary() 
+    {
         System.out.println("-----Needs-----");
-        if (needNames.isEmpty()) {
+        if (needNames.isEmpty()) 
+        {
             System.out.println("No spending has occured");
         }
-        else {
-            for (int i=0; i < needNames.size(); i++) {
+        else 
+        {
+            for (int i=0; i < needNames.size(); i++) 
+            {
                 System.out.println( needNames.get(i) + " : $" + needAmounts.get(i) + "\n");
+                System.out.printf("Needs Total: $%.2f%n", recursiveSum(needAmounts));
             }
         }
     }
     
     public void wantsSummary() {
         System.out.println("-----Wants-----");
-        if (needNames.isEmpty()) {
+        if (needNames.isEmpty()) 
+        {
             System.out.println("No spending has occured");
         }
-        else {
-            for (int i=0; i < wantNames.size(); i++) {
+        else 
+        {
+            for (int i=0; i < wantNames.size(); i++) 
+            {
                 System.out.println( wantNames.get(i) + " : $" + wantAmounts.get(i) +"\n");
+                System.out.printf("Wants Total: $%.2f%n", recursiveSum(wantAmounts));
             }
         }
     }
     
-    public void savingsSummary() {
-        System.out.println("Savings total = $" + budget1.savingsTotal);
+    public void savingsSummary() 
+    {
+        System.out.println("-----Wants-----");
+        if (savingAmounts.isEmpty()) 
+        {
+            System.out.println("No savings has occured");
+        }
+        else 
+        {
+            for (int i=0; i < savingAmounts.size(); i++) 
+            {
+                System.out.printf("Savings Total: $%.2f%n", recursiveSum(savingAmounts));
+            }
+        }
     }
     
     public static void validateStandard()
@@ -132,3 +180,4 @@ public class BudgetMain
     
     }
 }
+
