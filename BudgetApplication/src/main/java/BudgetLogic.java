@@ -20,6 +20,10 @@ public class BudgetLogic {
     private double wantsTotal;
     private double savingsTotal;
     
+    //for tracking spending
+    public double needsSpent = 0;
+    public double wantsSpent = 0;
+    
     //add Array lists for showing items in each category
     //add methods for getting totals spent displayed
     
@@ -100,5 +104,12 @@ public class BudgetLogic {
         savingsTotal = income *.2;
     }
     
+    //for tracking spending
+    public void addNeed (double cost) {
+        needsSpent += cost;
+    }
+    public void addWant (double cost) {
+        wantsSpent += cost;
+    }
     
 }
