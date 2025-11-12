@@ -41,7 +41,6 @@ public class BudgetLogic {
         this.savings = savings;
         this.income = income;
     }
-   
     
     //getters and setters
     public double GetNeeds() {
@@ -94,7 +93,6 @@ public class BudgetLogic {
     public void setSavingsTotal(double savingsTotal) {
         this.savingsTotal = savingsTotal;
     }
-    
     //__________________________________________________________________________
     
     //logic methods
@@ -108,6 +106,7 @@ public class BudgetLogic {
     public void addNeed (double cost) {
         needsSpent += cost;
     }
+    
     public void addWant (double cost) {
         wantsSpent += cost;
     }

@@ -132,7 +132,7 @@ public class BudgetMain
                 if (value < 0)
                 {
                     System.out.println("Enter a positive number");
-                    continue; 
+                    continue; // restarts the while loop
                 }
                 return value; 
             }
@@ -141,7 +141,6 @@ public class BudgetMain
                 System.out.println("Make sure you enter a number as your entry.");
             }
         }
-        
     }
     
     public static void main(String[] args) 
@@ -165,7 +164,7 @@ public class BudgetMain
     }
     else {
         System.out.println("Enter percentage allocated to Needs: (enter as decimal)");
-        double needsPercentage = scan.nextDouble();
+        double needsPercentage = scan.nextDouble(); // use validate double in these declarations? 
         
         System.out.println("Enter percentage allocated to Wants: (enter as decimal)");
         double wantsPercentage = scan.nextDouble();
@@ -175,7 +174,6 @@ public class BudgetMain
         
         budget1 = new BudgetLogic(needsPercentage, wantsPercentage, savingsPercentage, income);
         //budget1.calculateCategories();
-        
     }
     
     //user menu where they can add things, view summaries, and exit
@@ -186,10 +184,10 @@ public class BudgetMain
         System.out.println("-----Menu-----");
         System.out.println("1 - Add Needs");
         System.out.println("2 - Add Wants");
-        System.out.println("3 - View Needs Summary");
-        System.out.println("4 - View Wants Summary");
-        System.out.println("5 - View Savings Summary");
-        System.out.println("6 - Reset Percentages"); //IDK if we want this or not
+        System.out.println("3 - Add Savings");
+        System.out.println("4 - View Needs Summary");
+        System.out.println("5 - View Wants Summary");
+        System.out.println("6 - View Savings Summary"); //IDK if we want this or not - removed reset percentages
         System.out.println("7 - Exit");
         
         int choice = scan.nextInt();
@@ -228,16 +226,17 @@ public class BudgetMain
             }
         }
         else if (choice == 3) {
-            needsSummary();
+            // a similar loop as the one above for savings.
         }
         else if (choice == 4) {
-            wantsSummary();
+            needsSummary();
         }
         else if (choice == 5) {
-            savingsSummary();
+            wantsSummary();
         }
         else if (choice==6) {
-            //add something to allow changing percentage allocations
+            savingsSummary();
+
         }
         else if (choice == 7) {
             menu = false;
@@ -246,14 +245,7 @@ public class BudgetMain
         else {
             System.out.println("Enter a valid option");
         }
-        
     }
-    
-    
-
-    
-    
-    
     }
 }
 
