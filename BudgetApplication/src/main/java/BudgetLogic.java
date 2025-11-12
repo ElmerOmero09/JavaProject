@@ -23,6 +23,7 @@ public class BudgetLogic {
     //for tracking spending
     public double needsSpent = 0;
     public double wantsSpent = 0;
+    public double savingsCollected = 0;
     
     //add Array lists for showing items in each category
     //add methods for getting totals spent displayed
@@ -41,7 +42,6 @@ public class BudgetLogic {
         this.savings = savings;
         this.income = income;
     }
-   
     
     //getters and setters
     public double GetNeeds() {
@@ -94,7 +94,6 @@ public class BudgetLogic {
     public void setSavingsTotal(double savingsTotal) {
         this.savingsTotal = savingsTotal;
     }
-    
     //__________________________________________________________________________
     
     //logic methods
@@ -108,8 +107,12 @@ public class BudgetLogic {
     public void addNeed (double cost) {
         needsSpent += cost;
     }
+    
     public void addWant (double cost) {
         wantsSpent += cost;
+    }
+    public void addSaving (double cost) {
+        savingsCollected += cost;
     }
     
 }

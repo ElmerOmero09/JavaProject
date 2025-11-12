@@ -106,6 +106,7 @@ public class BudgetMain
             {
                 System.out.printf("Savings Total: $%.2f%n", recursiveSum(savingAmounts));
             }
+            System.out.printf("Total Savings: $%.2f%n", budget1.getSavingsTotal() + recursiveSum(savingAmounts));
         }
     }
     
@@ -132,7 +133,7 @@ public class BudgetMain
                 if (value < 0)
                 {
                     System.out.println("Enter a positive number");
-                    continue; 
+                    continue; // restarts the while loop
                 }
                 return value; 
             }
@@ -141,8 +142,6 @@ public class BudgetMain
                 System.out.println("Make sure you enter a number as your entry.");
             }
         }
-        
-        
     }
     
     public static void main(String[] args) 
@@ -161,10 +160,11 @@ public class BudgetMain
         System.out.println("-----Menu-----");
         System.out.println("1 - Add Needs");
         System.out.println("2 - Add Wants");
-        System.out.println("3 - View Needs Summary");
-        System.out.println("4 - View Wants Summary");
-        System.out.println("5 - View Savings Summary");
-        System.out.println("6 - Exit");
+        System.out.println("3 - Add Savings");
+        System.out.println("4 - View Needs Summary");
+        System.out.println("5 - View Wants Summary");
+        System.out.println("6 - View Savings Summary"); //IDK if we want this or not - removed reset percentages
+        System.out.println("7 - Exit");
         
         int choice = scan.nextInt();
         scan.nextLine();
@@ -199,24 +199,38 @@ public class BudgetMain
             }
         }
         else if (choice == 3) {
-            needsSummary();
+            // a similar loop as the one above for savings.
+            System.out.println("Quantity of savings to enter:");
+            int num = scan.nextInt();
+            scan.nextLine();
+            for (int i=0; i < num; i++) {
+                System.out.println("Name of item: ");
+                stringInput = scan.nextLine();
+                savingsNames.add(stringInput);
+                
+                costInput = validateDouble("Amount to save:");
+                savingAmounts.add(costInput);
+                budget1.addSaving(costInput);
+            }
         }
         else if (choice == 4) {
-            wantsSummary();
+            needsSummary();
         }
         else if (choice == 5) {
-            savingsSummary();
+            wantsSummary();
         }
-        else if (choice == 6) {
+        else if (choice==6) {
+            savingsSummary();
+
+        }
+        else if (choice == 7) {
             menu = false;
             System.out.println("Budget Education Successfull");
         }
         else {
             System.out.println("Enter a valid option");
         }
-        
     }
-
     }
 }
 
