@@ -16,12 +16,12 @@ public class BudgetMain
     // Global variables used
     // crate a scanner for input
     static Scanner scan = new Scanner(System.in);
-    static double income;
+    static String income;
     static String standard = " ";
 
     static BudgetLogic budget1; 
     // global counter variables for each running totals of categories. 
-    double currentNeedsTtotal = 0; 
+    double currentNeedsTotal = 0; 
     double currentWantsTotal = 0;
     double currentSavingsTotal = 0; 
     
@@ -142,41 +142,16 @@ public class BudgetMain
             }
         }
         
+        
     }
     
     public static void main(String[] args) 
     {
     //loops for input,output, and adding items to correct categories
-    //method to recursively add items to proper category
-    
-    
-    System.out.println("What is your income?");
-    income = scan.nextDouble();
-    
-    System.out.println("Do you want to implement your own financial rule?");
-    standard = scan.nextLine(); 
-    //validation of standard 
-    validateStandard();
-    
-    //BudgetLogic budget1 = new BudgetLogic(income); 
-    if (standard.equalsIgnoreCase("no")) {
-        budget1 = new BudgetLogic(income);
-        budget1.calculateCategories();
-    }
-    else {
-        System.out.println("Enter percentage allocated to Needs: (enter as decimal)");
-        double needsPercentage = scan.nextDouble();
-        
-        System.out.println("Enter percentage allocated to Wants: (enter as decimal)");
-        double wantsPercentage = scan.nextDouble();
-        
-        System.out.println("Enter percentage allocated to Savings: (enter as decimal)");
-        double savingsPercentage = scan.nextDouble();
-        
-        budget1 = new BudgetLogic(needsPercentage, wantsPercentage, savingsPercentage, income);
-        //budget1.calculateCategories();
-        
-    }
+    Double incomeChecked = validateDouble("Enter income: ");
+     
+    budget1 = new BudgetLogic(incomeChecked);
+    budget1.calculateCategories();
     
     //user menu where they can add things, view summaries, and exit
     boolean menu = true;
@@ -189,8 +164,7 @@ public class BudgetMain
         System.out.println("3 - View Needs Summary");
         System.out.println("4 - View Wants Summary");
         System.out.println("5 - View Savings Summary");
-        System.out.println("6 - Reset Percentages"); //IDK if we want this or not
-        System.out.println("7 - Exit");
+        System.out.println("6 - Exit");
         
         int choice = scan.nextInt();
         scan.nextLine();
@@ -204,11 +178,9 @@ public class BudgetMain
                 stringInput = scan.nextLine();
                 needNames.add(stringInput);
                 
-                System.out.println("Cost of item: ");
-                costInput = scan.nextDouble();
+                costInput = validateDouble("Cost of item:");
                 needAmounts.add(costInput);
                 budget1.addNeed(costInput);
-                scan.nextLine();
             }
         }
         else if (choice == 2) {
@@ -220,11 +192,10 @@ public class BudgetMain
                 stringInput = scan.nextLine();
                 wantNames.add(stringInput);
                 
-                System.out.println("Cost of item: ");
-                costInput = scan.nextDouble();
+                costInput = validateDouble("Cost of item:");
                 wantAmounts.add(costInput);
                 budget1.addWant(costInput);
-                scan.nextLine();
+                //scan.nextLine();
             }
         }
         else if (choice == 3) {
@@ -236,24 +207,16 @@ public class BudgetMain
         else if (choice == 5) {
             savingsSummary();
         }
-        else if (choice==6) {
-            //add something to allow changing percentage allocations
-        }
-        else if (choice == 7) {
+        else if (choice == 6) {
             menu = false;
-            System.out.println("Budget Education Successfull"); //wrote this as a joke, couldnt think of an exit message
+            System.out.println("Budget Education Successfull");
         }
         else {
             System.out.println("Enter a valid option");
         }
         
     }
-    
-    
 
-    
-    
-    
     }
 }
 
