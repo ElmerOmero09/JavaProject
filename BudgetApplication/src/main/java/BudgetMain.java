@@ -110,16 +110,6 @@ public class BudgetMain
         }
     }
     
-    // BELOW METHOD NOT USED... DELETE?
-//    public static void validateStandard()
-//    {
-//        while( !standard.equals("Yes") && !standard.equals("yes") && !standard.equals("YES") && !standard.equals("No") && !standard.equals("no") && !standard.equals("no"))
-//        {
-//            System.out.println("Enter a valid answer. Yes or No?");
-//            standard = scan.nextLine(); 
-//        }
-//    }
-    
     // Exception handling - FOR DOUBLES 
     public static double validateDouble(String prompt)
     {
@@ -133,7 +123,7 @@ public class BudgetMain
                 
                 if (value < 0)
                 {
-                    System.out.println("Enter a positive double");
+                    System.out.println("Make sure you enter a positive double as your entry.");
                     continue; // restarts the while loop
                 }
                 return value; 
@@ -144,6 +134,7 @@ public class BudgetMain
             }
         }
     }
+    
     // EXCEPTION HANDLING FOR INTEGERS
     public static int validateInt(String prompt)
     {
@@ -157,7 +148,7 @@ public class BudgetMain
                 
                 if(value < 0)
                 {
-                    System.out.println("Enter a valid positive integer.");
+                    System.out.println("Make sure you enter a valid positive integer as your entry.");
                     continue;
                 }
                 return value;
@@ -169,11 +160,10 @@ public class BudgetMain
         }
     }
     
-    
     public static void main(String[] args) 
     {
     //loops for input,output, and adding items to correct categories
-    Double incomeChecked = validateDouble("Enter income: ");
+    Double incomeChecked = validateDouble("What is your income for this month? ");
      
     budget1 = new BudgetLogic(incomeChecked);
     budget1.calculateCategories();
@@ -192,30 +182,30 @@ public class BudgetMain
         System.out.println("6 - View Savings Summary"); //IDK if we want this or not - removed reset percentages
         System.out.println("7 - Exit");
         
-        int choice = validateInt("Enter your selection.");
+        int choice = validateInt("Enter your menu selection selection.");
         
         if (choice == 1) {
-            int num = validateInt("Quantity of needs to enter:");
+            int num = validateInt("How many expenses are you entering under the Needs category this month?:");
             scan.nextLine();
             for (int i=0; i < num; i++) {
-                System.out.println("Name of item: ");
+                System.out.println("Name of expense: ");
                 stringInput = scan.nextLine();
                 needNames.add(stringInput);
                 
-                costInput = validateDouble("Cost of item:");
+                costInput = validateDouble("Expense amount:");
                 needAmounts.add(costInput);
                 budget1.addNeed(costInput);
             }
         }
         else if (choice == 2) {
-            int num = validateInt("Quantity of wants to enter:");
+            int num = validateInt("How many expenses are you entering under the Wants category this month?");
             scan.nextLine();
             for (int i=0; i < num; i++) {
-                System.out.println("Name of item: ");
+                System.out.println("Name of expense: ");
                 stringInput = scan.nextLine();
                 wantNames.add(stringInput);
                 
-                costInput = validateDouble("Cost of item:");
+                costInput = validateDouble("Expense amount:");
                 wantAmounts.add(costInput);
                 budget1.addWant(costInput);
                 //scan.nextLine();
@@ -223,14 +213,14 @@ public class BudgetMain
         }
         else if (choice == 3) {
             // a similar loop as the one above for savings.
-            int num = validateInt("Quantity of savings categories to enter:");
+            int num = validateInt("How many savongs accounts did you contribute to this month?");
             scan.nextLine();
             for (int i=0; i < num; i++) {
-                System.out.println("Name of item: ");
+                System.out.println("Savings account: ");
                 stringInput = scan.nextLine();
                 savingsNames.add(stringInput);
                 
-                costInput = validateDouble("Amount to save:");
+                costInput = validateDouble("Amount saved under this account:");
                 savingAmounts.add(costInput);
                 budget1.addSaving(costInput);
             }
@@ -247,13 +237,14 @@ public class BudgetMain
         }
         else if (choice == 7) {
             menu = false;
-            System.out.println("Session Overview");
+            System.out.println("Here is your budget overview for this month:");
             needsSummary();
             wantsSummary();
             savingsSummary();
+            System.out.println("Thank you for using this program.")
         }
         else {
-            System.out.println("Enter a valid option");
+            System.out.println("Enter a valid menu option");
         }
     }
     }
