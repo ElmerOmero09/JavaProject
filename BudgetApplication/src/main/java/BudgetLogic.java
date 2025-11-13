@@ -35,14 +35,6 @@ public class BudgetLogic {
         this.income = income;
     }
     
-    public BudgetLogic(double needs, double wants, double savings, double income)
-    {
-        this.needs = needs;
-        this.wants = wants; 
-        this.savings = savings;
-        this.income = income;
-    }
-    
     //getters and setters
     public double GetNeeds() {
         return needs;

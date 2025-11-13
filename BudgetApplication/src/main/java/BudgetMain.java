@@ -98,7 +98,7 @@ public class BudgetMain
         if (savingAmounts.isEmpty()) 
         {
             System.out.println("No savings occured this month");
-            System.out.println("Balance: $" + (budget1.getSavingsTotal()));
+            System.out.println("The target was: $" + (budget1.getSavingsTotal()));
         }
         else 
         {
@@ -107,7 +107,7 @@ public class BudgetMain
                System.out.println(savingsNames.get(i) + " : $" + savingAmounts.get(i) + "\n");
             }
             System.out.printf("Savings Total: $%.2f%n", recursiveSum(savingAmounts));
-            System.out.printf("Total Savings: $%.2f%n", budget1.getSavingsTotal() + recursiveSum(savingAmounts));
+            System.out.printf("Savings target this month: $%.2f%n", budget1.getSavingsTotal());
         }
     }
     
