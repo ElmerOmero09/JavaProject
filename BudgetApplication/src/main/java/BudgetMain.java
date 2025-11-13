@@ -104,8 +104,9 @@ public class BudgetMain
         {
             for (int i=0; i < savingAmounts.size(); i++) 
             {
-                System.out.printf("Savings Total: $%.2f%n", recursiveSum(savingAmounts));
+               System.out.println(savingsNames.get(i) + " : $" + savingAmounts.get(i) + "\n");
             }
+            System.out.printf("Savings Total: $%.2f%n", recursiveSum(savingAmounts));
             System.out.printf("Total Savings: $%.2f%n", budget1.getSavingsTotal() + recursiveSum(savingAmounts));
         }
     }
@@ -186,7 +187,6 @@ public class BudgetMain
         
         if (choice == 1) {
             int num = validateInt("How many expenses are you entering under the Needs category this month?:");
-            scan.nextLine();
             for (int i=0; i < num; i++) {
                 System.out.println("Name of expense: ");
                 stringInput = scan.nextLine();
@@ -199,7 +199,6 @@ public class BudgetMain
         }
         else if (choice == 2) {
             int num = validateInt("How many expenses are you entering under the Wants category this month?");
-            scan.nextLine();
             for (int i=0; i < num; i++) {
                 System.out.println("Name of expense: ");
                 stringInput = scan.nextLine();
@@ -213,8 +212,7 @@ public class BudgetMain
         }
         else if (choice == 3) {
             // a similar loop as the one above for savings.
-            int num = validateInt("How many savongs accounts did you contribute to this month?");
-            scan.nextLine();
+            int num = validateInt("How many savings accounts did you contribute to this month?");
             for (int i=0; i < num; i++) {
                 System.out.println("Savings account: ");
                 stringInput = scan.nextLine();
@@ -241,7 +239,7 @@ public class BudgetMain
             needsSummary();
             wantsSummary();
             savingsSummary();
-            System.out.println("Thank you for using this program.")
+            System.out.println("Thank you for using this program.");
         }
         else {
             System.out.println("Enter a valid menu option");
