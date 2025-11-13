@@ -241,7 +241,7 @@ public class BudgetMain
             needsSummary();
             wantsSummary();
             savingsSummary();
-            System.out.println("Thank you for using this program.")
+            System.out.println("Thank you for using this program.");
         }
         else {
             System.out.println("Enter a valid menu option");
