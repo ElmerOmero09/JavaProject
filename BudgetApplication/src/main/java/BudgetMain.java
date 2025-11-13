@@ -97,7 +97,7 @@ public class BudgetMain
         System.out.println("-----Savings-----");
         if (savingAmounts.isEmpty()) 
         {
-            System.out.println("No savings spending has occured");
+            System.out.println("No savings occured this month");
             System.out.println("Balance: $" + (budget1.getSavingsTotal()));
         }
         else 
