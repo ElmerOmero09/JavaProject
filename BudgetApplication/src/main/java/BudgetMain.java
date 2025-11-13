@@ -110,16 +110,17 @@ public class BudgetMain
         }
     }
     
-    public static void validateStandard()
-    {
-        while( !standard.equals("Yes") && !standard.equals("yes") && !standard.equals("YES") && !standard.equals("No") && !standard.equals("no") && !standard.equals("no"))
-        {
-            System.out.println("Enter a valid answer. Yes or No?");
-            standard = scan.nextLine(); 
-        }
-    }
+    // BELOW METHOD NOT USED... DELETE?
+//    public static void validateStandard()
+//    {
+//        while( !standard.equals("Yes") && !standard.equals("yes") && !standard.equals("YES") && !standard.equals("No") && !standard.equals("no") && !standard.equals("no"))
+//        {
+//            System.out.println("Enter a valid answer. Yes or No?");
+//            standard = scan.nextLine(); 
+//        }
+//    }
     
-    // Exception handling
+    // Exception handling - FOR DOUBLES 
     public static double validateDouble(String prompt)
     {
         while(true)
@@ -132,7 +133,7 @@ public class BudgetMain
                 
                 if (value < 0)
                 {
-                    System.out.println("Enter a positive number");
+                    System.out.println("Enter a positive double");
                     continue; // restarts the while loop
                 }
                 return value; 
@@ -143,6 +144,31 @@ public class BudgetMain
             }
         }
     }
+    // EXCEPTION HANDLING FOR INTEGERS
+    public static int validateInt(String prompt)
+    {
+        while(true)
+        {
+            int value; 
+            try
+            {
+                System.out.println(prompt);
+                value = Integer.parseInt(scan.nextLine().trim());
+                
+                if(value < 0)
+                {
+                    System.out.println("Enter a valid positive integer.");
+                    continue;
+                }
+                return value;
+            }
+            catch(NumberFormatException e)
+            {
+                System.out.println("Make sure you enter a number as your entry.");
+            }
+        }
+    }
+    
     
     public static void main(String[] args) 
     {
@@ -166,12 +192,10 @@ public class BudgetMain
         System.out.println("6 - View Savings Summary"); //IDK if we want this or not - removed reset percentages
         System.out.println("7 - Exit");
         
-        int choice = scan.nextInt();
-        scan.nextLine();
+        int choice = validateInt("Enter your selection.");
         
         if (choice == 1) {
-            System.out.println("Quantity of needs to enter:");
-            int num = scan.nextInt();
+            int num = validateInt("Quantity of needs to enter:");
             scan.nextLine();
             for (int i=0; i < num; i++) {
                 System.out.println("Name of item: ");
@@ -184,8 +208,7 @@ public class BudgetMain
             }
         }
         else if (choice == 2) {
-            System.out.println("Quantity of wants to enter:");
-            int num = scan.nextInt();
+            int num = validateInt("Quantity of wants to enter:");
             scan.nextLine();
             for (int i=0; i < num; i++) {
                 System.out.println("Name of item: ");
@@ -200,8 +223,7 @@ public class BudgetMain
         }
         else if (choice == 3) {
             // a similar loop as the one above for savings.
-            System.out.println("Quantity of savings to enter:");
-            int num = scan.nextInt();
+            int num = validateInt("Quantity of savings categories to enter:");
             scan.nextLine();
             for (int i=0; i < num; i++) {
                 System.out.println("Name of item: ");
@@ -225,7 +247,10 @@ public class BudgetMain
         }
         else if (choice == 7) {
             menu = false;
-            System.out.println("Budget Education Successfull");
+            System.out.println("Session Overview");
+            needsSummary();
+            wantsSummary();
+            savingsSummary();
         }
         else {
             System.out.println("Enter a valid option");
